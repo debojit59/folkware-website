@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import HeroDivider from "./constant/HeroDivider";
+import About from "./components/About";
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <HeroDivider />
+      <About />
     </div>
   );
 }
