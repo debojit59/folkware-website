@@ -1,3 +1,8 @@
+// src/components/Card.tsx
+import Impact from "../assets/Impact.png";
+import Solution from "../assets/Solution.png";
+import WorkersOwned from "../assets/WorkersOwned.png";
+
 interface CardProps {
   title: string;
   description: string;
@@ -5,72 +10,152 @@ interface CardProps {
 }
 
 export default function Card({ title, description, variant }: CardProps) {
-  const rotation =
+  // match Figma tilt: ~ +6°, 0°, -6°
+  const rotationClass =
     variant === "cooperative"
-      ? "rotate-[3deg]"
+      ? "rotate-[-4deg]" // Figma correct angle
       : variant === "impact"
-      ? "-rotate-[3deg]"
-      : "rotate-0";
+      ? "-rotate-[4deg]" // Figma correct angle
+      : "rotate-[-4deg]";
+
+  const imageMap = {
+    cooperative: WorkersOwned,
+    digital: Solution,
+    impact: Impact,
+  } as const;
+
+  const image = imageMap[variant];
 
   return (
-    <div className={`relative ${rotation}`}>
+    <div className={`relative ${rotationClass}`}>
       <div
         className="
-        bg-[#E4F4FA]
-        border border-[#4BA3C3]
-        rounded-lg
-        shadow-[0_12px_40px_rgba(0,0,0,0.12)]
-        w-[360px] h-[280px]
-        px-6 py-6
-      "
+          bg-[#E4F4FA]
+          border border-[#4BA3C3]
+          rounded-2xl
+          shadow-[0_12px_40px_rgba(0,0,0,0.12)]
+          w-[344px] h-[510px]
+          px-8 pt-10 pb-8
+          overflow-hidden
+          flex flex-col
+        "
       >
-        {/* VARIANT 1 – IMAGE AT BOTTOM */}
+        {/* ---- COOPERATIVE: text on top, image at bottom ---- */}
         {variant === "cooperative" && (
           <>
-            <h3 className="text-[#37344B] uppercase font-bebas text-[28px] tracking-[0.08em] mb-2">
+            <h3
+              className="uppercase mb-4"
+              style={{
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontWeight: 400,
+                fontSize: "36px",
+                lineHeight: "36px",
+                letterSpacing: "0",
+                color: "#37344B",
+              }}
+            >
               {title}
             </h3>
 
-            <p className="font-poppins text-[14px] leading-normal text-[#37344B]">
+            <p
+              className="mb-6"
+              style={{
+                fontFamily: '"Poppins", sans-serif',
+                fontWeight: 400,
+                fontSize: "20px",
+                lineHeight: "1",
+                color: "#37344B",
+              }}
+            >
               {description}
             </p>
 
             <div className="mt-auto">
-              {/* place cooperative illustration */}
-              <img src="/cards/cooperative.png" className="w-full" />
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-auto object-contain"
+              />
             </div>
           </>
         )}
 
-        {/* VARIANT 2 – IMAGE IN MIDDLE */}
+        {/* ---- DIGITAL: big image on top, then text ---- */}
         {variant === "digital" && (
           <>
-            <div className="mb-3">
-              <img src="/cards/digital.png" className="w-full" />
+            <div className="mb-6 flex-1 flex items-center justify-center">
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-auto object-contain"
+              />
             </div>
 
-            <h3 className="text-[#37344B] uppercase font-bebas text-[28px] tracking-[0.08em] mb-2">
+            <h3
+              className="uppercase mb-3"
+              style={{
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontWeight: 400,
+                fontSize: "36px",
+                lineHeight: "36px",
+                letterSpacing: "0",
+                color: "#37344B",
+              }}
+            >
               {title}
             </h3>
 
-            <p className="font-poppins text-[14px] leading-normal text-[#37344B]">
+            <p
+              style={{
+                fontFamily: '"Poppins", sans-serif',
+                fontWeight: 400,
+                fontSize: "20px",
+                lineHeight: "1",
+                color: "#37344B",
+              }}
+            >
               {description}
             </p>
           </>
         )}
 
-        {/* VARIANT 3 – IMAGE AT TOP */}
+        {/* ---- IMPACT: title, description, image at bottom ---- */}
         {variant === "impact" && (
           <>
-            <img src="/cards/impact.png" className="w-full mb-4" />
-
-            <h3 className="text-[#37344B] uppercase font-bebas text-[28px] tracking-[0.08em] mb-2">
+            <h3
+              className="uppercase mb-3"
+              style={{
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontWeight: 400,
+                fontSize: "36px",
+                lineHeight: "36px",
+                letterSpacing: "0",
+                color: "#37344B",
+              }}
+            >
               {title}
             </h3>
 
-            <p className="font-poppins text-[14px] leading-normal text-[#37344B]">
+            <p
+              className="mb-6"
+              style={{
+                fontFamily: '"Poppins", sans-serif',
+                fontWeight: 400,
+                fontSize: "20px",
+                lineHeight: "1",
+                color: "#37344B",
+              }}
+            >
               {description}
             </p>
+
+            <div className="mt-auto">
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-auto object-contain"
+              />
+            </div>
           </>
         )}
       </div>

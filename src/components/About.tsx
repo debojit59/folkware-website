@@ -1,3 +1,4 @@
+// src/components/About.tsx
 import Card from "./Card";
 
 export default function About() {
@@ -30,21 +31,22 @@ export default function About() {
         </div>
 
         {/* BOTTOM ROW: TILTED CARDS */}
-        <div className="flex flex-col md:flex-row gap-10 justify-between">
+        <div className="w-full flex flex-col md:flex-row justify-between items-end gap-12 mt-10">
+          {/* LEFT CARD – cooperative */}
           <Card
-            accent="left"
+            variant="cooperative"
             title="Worker-Owned Cooperative"
             description="Built and run by the people who power it. Together, we share responsibility, decisions, and success."
           />
 
           <Card
-            accent="center"
+            variant="digital"
             title="Digital Solutions That Empower"
             description="Websites, apps, and tools crafted for organizations of all sizes. Every solution is designed to be reliable, scalable & user-friendly."
           />
 
           <Card
-            accent="right"
+            variant="impact"
             title="Driven by Social Impact"
             description="Technology that creates value for both communities & companies. Our work is guided by ethics, inclusivity, and long-term benefit."
           />
