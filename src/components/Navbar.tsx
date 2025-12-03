@@ -2,7 +2,7 @@ import Logo from "../constant/icons";
 
 export default function Navbar() {
   return (
-    <nav className="w-full bg-[#0A0A0A] py-4">
+    <nav className="w-full bg-[#0F0F0F] py-4">
       <div className=" mx-auto px-[65px] pt-10 flex items-center justify-between relative ">
         {/* LEFT NAV */}
         <ul

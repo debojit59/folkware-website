@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="w-full bg-[#0A0A0A]">
+    <section className="w-full bg-[#0F0F0F]">
       <div className=" mx-auto px-[120px] py-[203px]">
         {/* MAIN GRID: headline on left, text on right */}
         <div className="grid items-start justify-center">
