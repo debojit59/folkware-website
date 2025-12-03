@@ -1,4 +1,4 @@
 @import "tailwindcss";
 
 /* Load custom fonts AFTER Tailwind import */
-@import "./fonts.css";
+@import "./constant/font.css";
