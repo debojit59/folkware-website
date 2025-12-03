@@ -2,8 +2,8 @@ import Logo from "../constant/icons";
 
 export default function Navbar() {
   return (
-    <nav className="w-full bg-[#0A0A0A] py-[16px]">
-      <div className="max-w-[1440px] mx-auto px-[120px] flex items-center justify-between relative">
+    <nav className="w-full bg-[#0A0A0A] py-4">
+      <div className=" mx-auto px-[65px] pt-10 flex items-center justify-between relative ">
         {/* LEFT NAV */}
         <ul
           className="hidden lg:flex items-center gap-10 text-white text-[24px] "
