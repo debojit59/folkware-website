@@ -5,7 +5,10 @@ export default function Navbar() {
     <nav className="w-full bg-[#0A0A0A] py-[16px]">
       <div className="max-w-[1440px] mx-auto px-[120px] flex items-center justify-between relative">
         {/* LEFT NAV */}
-        <ul className="hidden lg:flex items-center gap-[40px] text-white text-[24px] font-bebas">
+        <ul
+          className="hidden lg:flex items-center gap-10 text-white text-[24px] "
+          style={{ fontFamily: '"Bebas Neue", sans-serif', fontWeight: 400 }}
+        >
           <li>
             <a href="#">HOME</a>
           </li>
@@ -20,11 +23,19 @@ export default function Navbar() {
         {/* CENTER LOGO */}
         <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1">
           <Logo />
-          <span className="text-white text-[24px] font-bebas">folkware</span>
+          <span
+            className="text-white text-[24px] "
+            style={{ fontFamily: '"popings", sans-serif', fontWeight: 700 }}
+          >
+            folkware
+          </span>
         </div>
 
         {/* RIGHT NAV */}
-        <div className="hidden lg:flex items-center gap-[40px] text-[24px] font-bebas text-white">
+        <div
+          className="hidden lg:flex items-center gap-10 text-[24px] font-bebas text-white"
+          style={{ fontFamily: '"Bebas Neue", sans-serif', fontWeight: 400 }}
+        >
           <a href="#">STORIES</a>
           <a href="#">ABOUT US</a>
           <button className="px-4 py-1 bg-white text-black text-[16px] font-semibold">
