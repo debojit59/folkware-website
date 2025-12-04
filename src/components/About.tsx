@@ -1,28 +1,75 @@
 // src/components/About.tsx
+import { useMobile } from "../hooks/useMobile";
 import Card from "./Card";
 
 export default function About() {
-  return (
-    <section className="w-full bg-[white]">
-      <div className="w-full mx-auto pl-[79px] pt-[120px] pb-40 pr-[113px]">
-        {/* TOP ROW: HEADING + PARAGRAPH */}
-        <div className="flex items-start gap-6 mb-24">
-          {/* LEFT: BEHIND THE CODE */}
+  const isMobile = useMobile();
+
+  if (isMobile) {
+    return (
+      <section className="w-full bg-white">
+        <div className="w-full mx-auto px-4 py-16 sm:py-20">
+          {/* HEADING */}
           <p
-            className="uppercase text-[#FF7562] "
+            className="uppercase text-[#FF7562] text-[36px] sm:text-[48px] mb-6"
             style={{
               fontFamily: '"Bebas Neue", sans-serif',
               fontWeight: 400,
-              fontSize: "160px",
-              lineHeight: "160px",
-              // ~ -5%
+              lineHeight: "1.1",
             }}
           >
             BEHIND THE CODE
           </p>
 
-          {/* RIGHT: DESCRIPTION TEXT */}
-          <p className="text-#37344B font-poppins font-semibold text-[20px] mt-2 ">
+          {/* DESCRIPTION TEXT */}
+          <p className="text-[#37344B] font-poppins font-semibold text-sm sm:text-base mb-12 leading-relaxed">
+            At Folkware, every line of code carries more than logic — it carries
+            collaboration. As a co-operative team, we share ideas, make
+            collective decisions, and build solutions with people in mind.
+          </p>
+
+          {/* STACKED CARDS */}
+          <div className="flex flex-col items-center gap-8">
+            <Card
+              variant="cooperative"
+              title="Worker-Owned Cooperative"
+              description="Built and run by the people who power it. Together, we share responsibility, decisions, and success."
+            />
+            <Card
+              variant="digital"
+              title="Digital Solutions That Empower"
+              description="Websites, apps, and tools crafted for organizations of all sizes. Every solution is designed to be reliable, scalable & user-friendly."
+            />
+            <Card
+              variant="impact"
+              title="Driven by Social Impact"
+              description="Technology that creates value for both communities & companies. Our work is guided by ethics, inclusivity, and long-term benefit."
+            />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // DESKTOP LAYOUT (same heading + paragraph as you had)
+  return (
+    <section className="w-full bg-white">
+      <div className="w-full mx-auto pl-[79px] pt-[120px] pb-40 pr-[113px]">
+        {/* TOP ROW: HEADING + PARAGRAPH */}
+        <div className="flex items-start gap-6 mb-24">
+          <p
+            className="uppercase text-[#FF7562]"
+            style={{
+              fontFamily: '"Bebas Neue", sans-serif',
+              fontWeight: 400,
+              fontSize: "160px",
+              lineHeight: "160px",
+            }}
+          >
+            BEHIND THE CODE
+          </p>
+
+          <p className="text-#37344B font-poppins font-semibold text-[20px] mt-2">
             At Folkware, every line of code carries more than <br />
             logic — it carries collaboration. As a co-operative <br /> team, we
             share ideas, make collective decisions,
@@ -30,21 +77,21 @@ export default function About() {
           </p>
         </div>
 
-        {/* BOTTOM ROW: TILTED CARDS */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-end gap-12 mt-10">
-          {/* LEFT CARD – cooperative */}
+        {/* BOTTOM ROW: CARDS – straight rectangle, 24px gaps */}
+        <div
+          className="flex items-stretch gap-6"
+          style={{ height: "550px" }} // lock card height row to Figma
+        >
           <Card
             variant="cooperative"
             title="Worker-Owned Cooperative"
             description="Built and run by the people who power it. Together, we share responsibility, decisions, and success."
           />
-
           <Card
             variant="digital"
             title="Digital Solutions That Empower"
             description="Websites, apps, and tools crafted for organizations of all sizes. Every solution is designed to be reliable, scalable & user-friendly."
           />
-
           <Card
             variant="impact"
             title="Driven by Social Impact"
