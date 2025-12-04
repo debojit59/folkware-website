@@ -2,6 +2,7 @@
 import Impact from "../assets/Impact.png";
 import Solution from "../assets/Solution.png";
 import WorkersOwned from "../assets/WorkersOwned.png";
+import { useMobile } from "../hooks/useMobile";
 
 interface CardProps {
   title: string;
@@ -10,154 +11,117 @@ interface CardProps {
 }
 
 export default function Card({ title, description, variant }: CardProps) {
-  // match Figma tilt: ~ +6°, 0°, -6°
-  const rotationClass =
-    variant === "cooperative"
-      ? "rotate-[-4deg]" // Figma correct angle
-      : variant === "impact"
-      ? "-rotate-[4deg]" // Figma correct angle
-      : "rotate-[-4deg]";
+  const isMobile = useMobile();
 
-  const imageMap = {
+  const imageMap: Record<CardProps["variant"], string> = {
     cooperative: WorkersOwned,
     digital: Solution,
     impact: Impact,
-  } as const;
+  };
 
   const image = imageMap[variant];
 
-  return (
-    <div className={`relative ${rotationClass}`}>
+  // Mobile card styles
+  if (isMobile) {
+    return (
       <div
-        className="
-          bg-[#E4F4FA]
-          border border-[#4BA3C3]
-          rounded-2xl
-          shadow-[0_12px_40px_rgba(0,0,0,0.12)]
-          w-[344px] h-[510px]
-          px-8 pt-10 pb-8
-          overflow-hidden
-          flex flex-col
-        "
+        className="relative w-full"
+        style={{
+          height: "auto",
+        }}
       >
-        {/* ---- COOPERATIVE: text on top, image at bottom ---- */}
-        {variant === "cooperative" && (
-          <>
+        {/* ORANGE CARD BACKGROUND */}
+        <div className="w-full relative overflow-hidden bg-[#FF7562] shadow-[0_18px_45px_rgba(0,0,0,0.3)]">
+          {/* IMAGE AREA (TOP) */}
+          <div className="w-full h-60 sm:h-[300px] flex items-center justify-center">
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* BLACK DIAGONAL TEXT BAND (BOTTOM) */}
+          <div className="relative pt-6 pb-6 px-4 text-white bg-black">
             <h3
-              className="uppercase mb-4"
+              className="uppercase"
               style={{
                 fontFamily: '"Bebas Neue", sans-serif',
+                fontSize: "24px",
                 fontWeight: 400,
-                fontSize: "36px",
-                lineHeight: "36px",
-                letterSpacing: "0",
-                color: "#37344B",
+                letterSpacing: "-0.01em",
+                lineHeight: 1,
               }}
             >
               {title}
             </h3>
 
             <p
-              className="mb-6"
+              className="mt-2"
               style={{
                 fontFamily: '"Poppins", sans-serif',
+                fontSize: "16px",
                 fontWeight: 400,
-                fontSize: "20px",
-                lineHeight: "1",
-                color: "#37344B",
+                lineHeight: 1.4,
               }}
             >
               {description}
             </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-            <div className="mt-auto">
-              <img
-                src={image}
-                alt={title}
-                className="w-full h-auto object-contain"
-              />
-            </div>
-          </>
-        )}
+  // Desktop card styles
+  return (
+    <div
+      className="relative flex-shrink-0"
+      style={{
+        width: "440px", // Figma: card width
+        height: "550px", // Figma: card height
+      }}
+    >
+      {/* ORANGE CARD BACKGROUND */}
+      <div className="w-full h-full relative overflow-hidden bg-[#FF7562] shadow-[0_18px_45px_rgba(0,0,0,0.3)]">
+        {/* IMAGE AREA (TOP) */}
+        <div className="w-full h-[340px] flex items-center justify-center">
+          <img src={image} alt={title} className="w-full h-full object-cover" />
+        </div>
 
-        {/* ---- DIGITAL: big image on top, then text ---- */}
-        {variant === "digital" && (
-          <>
-            <div className="mb-6 flex-1 flex items-center justify-center">
-              <img
-                src={image}
-                alt={title}
-                className="w-full h-auto object-contain"
-              />
-            </div>
+        {/* BLACK DIAGONAL TEXT BAND (BOTTOM) */}
+        <div className="absolute inset-x-0 bottom-0 h-[210px] overflow-hidden">
+          {/* Slanted black background */}
+          <div className="absolute inset-x-[-40px] bottom-[-40px] h-[260px] bg-black origin-bottom-left -skew-y-[6deg]" />
 
+          {/* Text content, NOT skewed */}
+          <div className="relative z-10 px-6 pt-4 pb-6 text-white">
             <h3
-              className="uppercase mb-3"
+              className="uppercase"
               style={{
                 fontFamily: '"Bebas Neue", sans-serif',
-                fontWeight: 400,
                 fontSize: "36px",
-                lineHeight: "36px",
-                letterSpacing: "0",
-                color: "#37344B",
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
+                lineHeight: 1,
               }}
             >
               {title}
             </h3>
 
             <p
+              className="mt-2"
               style={{
                 fontFamily: '"Poppins", sans-serif',
-                fontWeight: 400,
                 fontSize: "20px",
-                lineHeight: "1",
-                color: "#37344B",
+                fontWeight: 400,
+                lineHeight: 1.4,
               }}
             >
               {description}
             </p>
-          </>
-        )}
-
-        {/* ---- IMPACT: title, description, image at bottom ---- */}
-        {variant === "impact" && (
-          <>
-            <h3
-              className="uppercase mb-3"
-              style={{
-                fontFamily: '"Bebas Neue", sans-serif',
-                fontWeight: 400,
-                fontSize: "36px",
-                lineHeight: "36px",
-                letterSpacing: "0",
-                color: "#37344B",
-              }}
-            >
-              {title}
-            </h3>
-
-            <p
-              className="mb-6"
-              style={{
-                fontFamily: '"Poppins", sans-serif',
-                fontWeight: 400,
-                fontSize: "20px",
-                lineHeight: "1",
-                color: "#37344B",
-              }}
-            >
-              {description}
-            </p>
-
-            <div className="mt-auto">
-              <img
-                src={image}
-                alt={title}
-                className="w-full h-auto object-contain"
-              />
-            </div>
-          </>
-        )}
+          </div>
+        </div>
       </div>
     </div>
   );
