@@ -1,4 +1,5 @@
 // src/components/About.tsx
+import AboutDivider from "../constant/AboutDivider";
 import { useMobile } from "../hooks/useMobile";
 import Card from "./Card";
 
@@ -7,7 +8,7 @@ export default function About() {
 
   if (isMobile) {
     return (
-      <section className="w-full bg-white">
+      <section className="relative w-full bg-white overflow-visible">
         <div className="w-full mx-auto px-4 py-16 sm:py-20">
           {/* HEADING */}
           <p
@@ -47,14 +48,15 @@ export default function About() {
             />
           </div>
         </div>
+        <AboutDivider />
       </section>
     );
   }
 
   // DESKTOP LAYOUT (same heading + paragraph as you had)
   return (
-    <section className="w-full bg-white">
-      <div className="w-full mx-auto pl-[79px] pt-[120px] pb-40 pr-[113px]">
+    <section className="relative w-full  overflow-visible bg-white">
+      <div className="w-full mx-auto pl-[79px] pt-[120px] pb-40 pr-[113px] ">
         {/* TOP ROW: HEADING + PARAGRAPH */}
         <div className="flex items-start gap-6 mb-24">
           <p
@@ -99,6 +101,7 @@ export default function About() {
           />
         </div>
       </div>
+      <AboutDivider />
     </section>
   );
 }

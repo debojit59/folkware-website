@@ -1,3 +1,4 @@
+import HeroDivider from "../constant/HeroDivider";
 import { useMobile } from "../hooks/useMobile";
 
 export default function Hero() {
@@ -40,7 +41,7 @@ export default function Hero() {
 
   // DESKTOP LAYOUT
   return (
-    <section className="w-full bg-[#0F0F0F]">
+    <section className="relative w-full bg-[#0F0F0F]">
       <div className=" mx-auto px-[120px] py-[203px]">
         {/* MAIN GRID: headline on left, text on right */}
         <div className="grid items-start justify-center">
@@ -98,6 +99,7 @@ export default function Hero() {
           </div> */}
         </div>
       </div>
+      <HeroDivider />
     </section>
   );
 }
